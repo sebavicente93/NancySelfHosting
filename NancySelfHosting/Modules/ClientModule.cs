@@ -13,21 +13,7 @@
     {
         public ClientModule() : base("/client")
         {
-            Before += context =>
-            {
-                var startTime = DateTimeOffset.Now.ToUnixTimeMilliseconds().ToString();
-                context.Items.Add("X-RequestStart", startTime);
-                return null;
-            };
-
-            After += context =>
-            {
-                var startTime = Int64.Parse(context.Items["X-RequestStart"].ToString());
-                long endTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
-                var totalTime = endTime - startTime;
-                Console.WriteLine(context.Request.Method+" " + context.Request.Path + ": " + totalTime + " miliseconds");
-            };
-
+ 
             Get("/list",  (_) =>
             {
                 List<ClientEntity> client = GetPeople();
@@ -58,6 +44,7 @@
                 }
                 
             });
+
 
             Delete("/{id:int}", (parameters) =>
             {

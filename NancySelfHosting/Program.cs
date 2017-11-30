@@ -11,10 +11,10 @@
             // Reserva la url para poder levantar el NancyHost. Desde Visual Studio requiere ser ejecutado como admin
             HostConfiguration hostConfigs = new HostConfiguration();
             hostConfigs.UrlReservations.CreateAutomatically = true;
+            hostConfigs.RewriteLocalhost = false;
             String hostingUrl = "http://localhost:50427";
 
             NancyHost nancyHost = new NancyHost(new Uri(hostingUrl), new MyBootstrapper(), hostConfigs);
-
 
             using (nancyHost)
             {
